@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         YT delete helper
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.1
 // @description  YT delete helper for playlists
 // @author       BigBaz
-// @match        https://www.youtube.com/*
+// @match        https://www.youtube.com/playlist*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        none
 // ==/UserScript==
@@ -23,9 +23,9 @@
                 e.appendChild(e.children[0].cloneNode());
                 const buttons = document.querySelectorAll("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button");
                 const newButton = buttons[1];
-                await new Promise(r => setTimeout(r, 500));
-                document.querySelectorAll("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button>yt-icon>yt-icon-shape>icon-shape>div>svg>path")[1].setAttribute("d", "M23.6464 0.646446L0.646447 23.6464M0.353554 0.646446L23.3536 23.6464");
-                document.querySelectorAll("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button>yt-icon>yt-icon-shape>icon-shape>div>svg>path")[1].setAttribute("stroke", "white");
+                await new Promise(r => setTimeout(r, 2000));
+                document.querySelectorAll("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button > yt-icon > yt-icon-shape > div > svg > path")[1].setAttribute("d", "M23.6464 0.646446L0.646447 23.6464M0.353554 0.646446L23.3536 23.6464");
+                document.querySelectorAll("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button > yt-icon > yt-icon-shape > div > svg > path")[1].setAttribute("stroke", "white");
                 newButton.onclick = async () => {
                     document.querySelector("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button").click();
                     document.querySelector("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button").click();
@@ -38,11 +38,11 @@
 
     async function wait_loading() {
         if (document.querySelectorAll('.ytd-playlist-video-list-renderer').length > 50) {
-            await new Promise(r => setTimeout(r, 2000));
+            await new Promise(r => setTimeout(r, 100));
             create_buttons()
         } else {
             console.log('Waiting for loading');
-            setTimeout(wait_loading, 500)
+            setTimeout(wait_loading, 200)
         }
     }
 

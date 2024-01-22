@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YT delete helper
 // @namespace    http://tampermonkey.net/
-// @version      2.2
+// @version      2.3
 // @description  YT delete helper for playlists
 // @author       BigBaz
 // @match        https://www.youtube.com/playlist*
@@ -24,8 +24,8 @@
                 const buttons = document.querySelectorAll("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button");
                 const newButton = buttons[1];
                 await new Promise(r => setTimeout(r, 2000));
-                document.querySelectorAll("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button > yt-icon > yt-icon-shape > icon-shape > div > svg > path")[1].setAttribute("d", "M23.6464 0.646446L0.646447 23.6464M0.353554 0.646446L23.3536 23.6464");
-                document.querySelectorAll("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button > yt-icon > yt-icon-shape > icon-shape > div > svg > path")[1].setAttribute("stroke", "white");
+                document.querySelectorAll("[n='"+n.toString()+"'] path")[1].setAttribute("d", "M23.6464 0.646446L0.646447 23.6464M0.353554 0.646446L23.3536 23.6464");
+                document.querySelectorAll("[n='"+n.toString()+"'] path")[1].setAttribute("stroke", "white");
                 newButton.onclick = async () => {
                     document.querySelector("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button").click();
                     document.querySelector("[n='"+n.toString()+"']>ytd-menu-renderer>yt-icon-button>#button").click();
